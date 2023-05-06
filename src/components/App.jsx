@@ -16,8 +16,14 @@ export class App extends Component {
     filter: '',
   };
 
+  nameCheker = name => {
+    return this.state.contacts.find(contact => contact.name === name);
+  };
+
   onFormSubmit = data => {
-    console.log('onSubmit', data);
+    if (this.nameCheker(data.name)) {
+      return alert(`${data.name} is already in contacts.`);
+    }
     this.setState(prevState => {
       const contactId = nanoid();
       return {
@@ -32,25 +38,27 @@ export class App extends Component {
     }));
   };
 
-  onFilterChange = (e) => {
+  onFilterChange = e => {
     this.setState({ filter: e.target.value });
   };
 
   onFilterContact = () => {
     const normalizedFilter = this.state.filter.toLowerCase();
-    
+
     const filteredContacts = this.state.contacts.filter(contact =>
       contact.name.toLowerCase().includes(normalizedFilter)
     );
-    console.log(filteredContacts);
-    return filteredContacts
+    return filteredContacts;
   };
 
   render() {
-    console.log('render contacts', this.state.contacts);
     return (
       <Container>
-        <Phonebook onSubmit={this.onFormSubmit} title="Phonebook"></Phonebook>
+        <Phonebook
+          contacts={this.onFilterContact()}
+          onSubmit={this.onFormSubmit}
+          title="Phonebook"
+        ></Phonebook>
         <Filter
           value={this.state.filter}
           onChange={this.onFilterChange}
