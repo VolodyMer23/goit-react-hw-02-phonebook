@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
-import { Container } from './App.styled';
-import { Phonebook } from './Phonebook/Phonebook';
 import { nanoid } from 'nanoid';
+import { Container, PhonebookContainer, PhonebookTitle } from './App.styled';
 import Contacts from './Phonebook/ContactsList/ContactList';
+import { ContactAddForm } from './Phonebook/ContactAddForm/ContactAddForm'; 
 import Filter from './Phonebook/Filter/Filter';
+import ContactsData from './Phonebook/Data/ContactsData.json';
 
 export class App extends Component {
   state = {
-    contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-    ],
+    contacts: ContactsData,
     filter: '',
   };
 
@@ -54,11 +50,11 @@ export class App extends Component {
   render() {
     return (
       <Container>
-        <Phonebook
-          contacts={this.onFilterContact()}
-          onSubmit={this.onFormSubmit}
-          title="Phonebook"
-        ></Phonebook>
+        <PhonebookContainer>
+          <PhonebookTitle>Phonebook</PhonebookTitle>
+          <ContactAddForm onSubmit={this.onFormSubmit}
+          ></ContactAddForm>
+        </PhonebookContainer>
         <Filter
           value={this.state.filter}
           onChange={this.onFilterChange}
