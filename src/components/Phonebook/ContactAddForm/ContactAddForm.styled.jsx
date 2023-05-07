@@ -85,9 +85,14 @@ export const AddContactBtn = styled.button`
   :focus,
   :hover {
     font-weight: 600;
-    background: #1f4b3f;
+    background-color: #1f4b3f;
   }
   :active {
     transform: translateY(10%);
   }
+  :disabled {
+    background-color: #646464;
+    pointer-events: none;
+  }
+  
 `;

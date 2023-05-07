@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { Container } from './App.styled';
-import { Phonebook } from './Phonebook/Phonebook';
 import { nanoid } from 'nanoid';
+import { Container, PhonebookContainer, PhonebookTitle } from './App.styled';
 import Contacts from './Phonebook/ContactsList/ContactList';
+import { ContactAddForm } from './Phonebook/ContactAddForm/ContactAddForm'; 
 import Filter from './Phonebook/Filter/Filter';
 import ContactsData from './Phonebook/Data/ContactsData.json';
-
 
 export class App extends Component {
   state = {
@@ -51,11 +50,11 @@ export class App extends Component {
   render() {
     return (
       <Container>
-        <Phonebook
-          contacts={this.onFilterContact()}
-          onSubmit={this.onFormSubmit}
-          title="Phonebook"
-        ></Phonebook>
+        <PhonebookContainer>
+          <PhonebookTitle>Phonebook</PhonebookTitle>
+          <ContactAddForm onSubmit={this.onFormSubmit}
+          ></ContactAddForm>
+        </PhonebookContainer>
         <Filter
           value={this.state.filter}
           onChange={this.onFilterChange}
