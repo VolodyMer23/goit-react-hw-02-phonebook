@@ -43,9 +43,9 @@ export class ContactAddForm extends Component {
               .max(11, 'Must be 11 nubmers or less')
               .required('Required'),
           })}
-          onSubmit={values => {
+          onSubmit={(values, { resetForm }) => {
             this.props.onSubmit(values);
-            console.log(values);
+            resetForm();
           }}
         >
           {({
